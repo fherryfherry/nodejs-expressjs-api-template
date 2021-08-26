@@ -12,8 +12,11 @@ const Product = function(product) {
 
 
 Product.create = (data) => {
+    console.log("Create", data);
     return new Promise(function(resolve,reject) {
-        db.query("INSERT INTO products SET ?", data, (err, res) => {
+        db.query("INSERT INTO products (sku,name,description,stock,price) values (?,?,?,?,?)", [
+            data.sku, data.name, data.description, data.stock, data.price
+        ], (err, res) => {
             if (err) throw err;
             resolve(true);
         });
